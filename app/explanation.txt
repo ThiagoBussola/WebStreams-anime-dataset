@@ -1,0 +1,21 @@
+This code defines a function called parseNDJSON(). The function returns a TransformStream object that is used to transform chunks of data.
+
+
+The TransformStream object has two main functions: transform() and flush(). The transform() function is called for each chunk of data, and the flush() function is called when there is no more data to transform.
+
+
+Inside the transform() function, the incoming chunk of data is concatenated to a buffer variable. Then, the buffer is split into individual items using the newline character (\n) as the delimiter. If the first item in the items array is empty, it is skipped.
+
+
+The first item in the items array is parsed as JSON and then enqueued using controller.enqueue(). Finally, the buffer is updated to store the last item in the array for further processing in subsequent chunks.
+
+
+The flush() function is called when there is no more data to transform. If the buffer is not empty, it is parsed as JSON and enqueued using controller.enqueue().
+
+
+In summary, this code defines a TransformStream that parses Newline Delimited JSON (NDJSON). It handles cases where multiple items are received in a single chunk of data and ensures that complete items are parsed and enqueued while preserving incomplete items for subsequent chunks.
+
+
+Clear
+Reload
+
